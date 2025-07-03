@@ -3,4 +3,4 @@
 .devcontainer
 venv/
 RELEASE_*
-howTo_
+howTo_*

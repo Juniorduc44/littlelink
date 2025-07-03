@@ -56,6 +56,10 @@
             <input type="radio" name="linksView" value="all" onchange="toggleLinksRadio('all')">
             All Links
           </label>
+          <label style="font-weight:bold;cursor:pointer;">
+            <input type="radio" name="linksView" value="generosity" onchange="toggleLinksRadio('generosity')">
+            $Generosity
+          </label>
         </form>
         <div class="button-stack" role="navigation" id="defaultLinksSection">
           <!-- GitHub -->
@@ -66,13 +70,16 @@
           <a class="button button-x" href="https://x.com/Jrducs" target="_blank" rel="noopener" role="button"><img class="icon" aria-hidden="true" src="icons/x.svg" alt="X Logo">X</a>
         </div>
         <div id="all_links_junior_ducatel" style="display:none;margin-top:24px;"></div>
+        <div id="generosity_links_section" style="display:none;margin-top:24px;"></div>
         <script>
-          var linksLoaded = { all_links_junior_ducatel: false };
+          var linksLoaded = { all_links_junior_ducatel: false, generosity_links_section: false };
           function toggleLinksRadio(view) {
             var defaultSection = document.getElementById('defaultLinksSection');
             var allLinksDiv = document.getElementById('all_links_junior_ducatel');
+            var generosityDiv = document.getElementById('generosity_links_section');
             if (view === 'all') {
               defaultSection.style.display = 'none';
+              generosityDiv.style.display = 'none';
               if (!linksLoaded.all_links_junior_ducatel) {
                 fetch('links_folder/all_links_junior_ducatel.html')
                   .then(response => response.text())
@@ -82,9 +89,22 @@
                   });
               }
               allLinksDiv.style.display = 'block';
+            } else if (view === 'generosity') {
+              defaultSection.style.display = 'none';
+              allLinksDiv.style.display = 'none';
+              if (!linksLoaded.generosity_links_section) {
+                fetch('links_folder/generosity_links.html')
+                  .then(response => response.text())
+                  .then(html => {
+                    generosityDiv.innerHTML = html;
+                    linksLoaded.generosity_links_section = true;
+                  });
+              }
+              generosityDiv.style.display = 'block';
             } else {
               defaultSection.style.display = 'block';
               allLinksDiv.style.display = 'none';
+              generosityDiv.style.display = 'none';
             }
           }
         </script>
