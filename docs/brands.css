@@ -643,3 +643,10 @@
   width: 1.5rem;
   height: 1.5rem;
 }
+
+/* Tea Button (Custom Buy Me A Coffee variant) */
+.button-tea {
+	--button-text: #ffffff;
+	--button-background: #0e1a2d;
+	--button-border: 1px solid #ffffff;
+}
